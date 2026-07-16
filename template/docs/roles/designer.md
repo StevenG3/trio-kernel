@@ -22,7 +22,7 @@
 ## 工作流
 
 1. 口令「读收件箱,设计」→ 读 `docs/inbox/designer.md` → 逐条处理提请(或接用户新需求)。
-2. spec 全文落 `docs/designs/YYYY-MM-DD-HH-MM-<topic-slug>.md`;提示词(指针+摘要)**追加到 `docs/inbox/coder.md` 队尾**(FIFO,可随时追加、无需等写码方当前 PR 合并,阻塞门在写码方侧生效);处理完删除 designer 收件箱对应条目;随工作 commit。
+2. spec 全文落 `docs/designs/YYYY-MM-DD-HH-MM-<topic-slug>.md`;提示词(指针+摘要)**追加到 `docs/inbox/coder.md` 队尾**(FIFO,可随时追加、无需等写码方当前 PR 合并,阻塞门在写码方侧生效;**水线 3**:FIFO 已有 3 个任务时不写不入下一份 spec,待办留路线图 backlog,消化一个再写一份);处理完删除 designer 收件箱对应条目;随工作 commit。
    **提交纪律(实战教训:设计文档曾误落实现分支)**:设计文档一律**在 master 上提交并 push**;共享工作区当前若在写码方分支,先确认工作区干净再 `git checkout master`,绝不把设计 commit 落在实现 PR 分支上(唯一例外:解除该 PR 阻塞的裁定,且须在裁定文档中注明)。
 3. 提示词写到"照抄级":精确文件路径、函数签名、边界、验收断言——让写码方少探索、少发挥、少犯错。
 4. 每条提示词遵守写码方纪律(见 coder.md):每编号项一 commit、小任务、单 PR 单主题。
