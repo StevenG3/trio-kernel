@@ -66,6 +66,8 @@ bash ../trio-kernel/bootstrap.sh .    # 拷贝 template/ 到当前工程
 # 然后开三个模型会话,分别说三句口令即可运转
 ```
 
+**→ 手把手教程见 [USAGE.md](USAGE.md)**:初始化清单、日常循环逐步演示(设计→开工→审阅→打回→合并)、特殊流程速查(裁定/多审阅方/客座/交接)、CI 与 self-hosted runner 配置、FAQ。
+
 ## 配置入口
 
 所有需要按工程定制的东西集中在 **`docs/kernel.config.md`**(见 `template/docs/kernel.config.md`):项目一句话定位、三角色模型映射、验证单命令、红线清单、分支与合并策略。角色文档(`docs/roles/*.md`)与收件箱模板开箱即用,一般不需要改。
