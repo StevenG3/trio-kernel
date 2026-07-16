@@ -27,7 +27,7 @@
 
 ### 2. git 即消息总线(收件箱协议)
 
-`docs/inbox/{designer,coder,reviewer}.md` 三个收件箱;条目 = 指针 + 摘要(全文在 `docs/{designs,devlogs,reviews}/`);处理方处理完删除条目并随工作 commit。**人类的三句口令**:
+`docs/inbox/{designer,coder,reviewer}.md` 三个收件箱;条目 = 指针 + 摘要(全文在 `docs/{designs,devlogs,reviews}/`);处理方处理完删除条目并随工作 commit——任务状态变更与代码变更**同 commit 原子耦合**,git 即完整审计轨迹。**总线可插拔**:多机协作/高并发写入场景可换 [GitHub Issues 总线](docs/bus-github-issues.md)(原子无推送竞争,代价是状态与代码两笔账,按项目形态选)。**人类的三句口令**:
 
 | 会话 | 口令 |
 |---|---|
@@ -49,6 +49,7 @@
 - 验证入口必须是**单命令、确定性**脚本(如 `./Scripts/ci.sh`),写码方交付前自跑一次全量;
 - 推荐配 **self-hosted runner**(零 GitHub Actions 配额消耗)在干净 checkout 自动跑同一脚本 = 独立第三方执行;
 - CI 脚本内部 fail-fast:便宜守卫(静态红线/lint)最前,最贵的(UI 测试)最后;提供 `--quick` 内环模式(不可作交付证据);
+- **请审与 CI 并行**(外部架构 draft 预扫反馈采纳):写码方开 PR 后立即请审,不等 runner——审阅方静态扫描不依赖 CI 结果,与 runner 同时跑,阻塞反馈提前一个 CI 周期;合并前 runner 必须绿的终审门禁不变;
 - **审阅方 fail-fast**:静态扫描(diff 走读/红线 grep/契约比对,零构建)确认任何阻塞条件 → 立即打回,**禁止再跑 CI**;前序无阻塞才核验 runner 结论 + 定向抽查;本地全量复跑仅限 runner 不可用/存疑/改动触及验证链路本身。**CI 是合并的必要门禁,但执行者是 runner,不是审阅方的时间。**
 
 ### 5. 文档协议(可追溯)

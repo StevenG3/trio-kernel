@@ -37,6 +37,10 @@
 - 写码方从最新 `origin/{{DEFAULT_BRANCH}}` 拉分支;单 PR 单主题;squash 合并(PR 标题即最终提交信息);合并后删分支。
 - 合并权:审阅方独占。
 
+## 5.5 消息总线
+
+- 总线:`file`(默认,收件箱文件,状态与代码同 commit)| `issues`(GitHub Issues,多机高并发,见内核 docs/bus-github-issues.md)
+
 ## 6. 文档命名
 
 - 永久文档:`docs/{designs,devlogs,reviews}/YYYY-MM-DD-HH-MM-<topic-slug>.md`(全英文小写 kebab-case,只增不删不覆盖)。

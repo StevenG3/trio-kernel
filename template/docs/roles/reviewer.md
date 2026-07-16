@@ -18,7 +18,7 @@
 
 1. 全量 diff 走读(不抽样)。
 2. devlog 逐条对代码核实(漏报/错报计 F 维)。
-3. 验证核验(仅前序无阻塞才进入):①核对写码方 red/green 证据;②核对 self-hosted runner CI 结论(干净 checkout 独立执行,runner 绿 = 独立验证已存在,默认不本地全量复跑);③定向抽查受影响 target(`{{VERIFY_CMD}} --quick` 或 `-only-testing:`)。**本地全量复跑仅限:runner 不可用/结论存疑/改动触及验证链路本身(验证脚本/静态守卫本身)。合并前 runner required check 必须为绿——CI 仍是合并必要门禁,执行者是 runner。**
+3. 验证核验(仅前序无阻塞才进入):①核对写码方 red/green 证据;②核对 self-hosted runner CI 结论(干净 checkout 独立执行,runner 绿 = 独立验证已存在,默认不本地全量复跑;静态扫描与 runner 并行,runner 未完成时先完成静态各步,合并前再回看其结论);③定向抽查受影响 target(`{{VERIFY_CMD}} --quick` 或 `-only-testing:`)。**本地全量复跑仅限:runner 不可用/结论存疑/改动触及验证链路本身(验证脚本/静态守卫本身)。合并前 runner required check 必须为绿——CI 仍是合并必要门禁,执行者是 runner。**
 4. 审美审查:UI 改动看写码方截图 + 对照 Theme token 与红线;拿不准的 UI 让用户扫一眼(你的审美是弱项,该求助求助)。
 5. 对抗 + 结构检查:grep 伪造字面量/TODO/强解包/@unchecked/调试残留/密钥泄漏/硬编码色值;同时用生产级四问:是否存在会漂移的重复真相;职责/状态所有权/依赖方向是否混乱;并发/错误恢复是否可靠;当前结构是否已妨碍独立测试、安全修改或扩展。纯命名偏好、无现实成本的重复不阻塞。
 6. 回归抽查:上一 Phase 核心链路走一条。
